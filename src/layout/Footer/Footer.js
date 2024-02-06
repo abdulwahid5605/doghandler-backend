@@ -20,15 +20,30 @@ const Footer = () => {
         fontFamily: "Arial",
       }}
     >
-      <Grid item xs={6} sm={3}>
-        <Typography variant="h4">OUR DETAILS</Typography>
+      <Grid item xs={12} sm={6} md={3}>
+        <Typography
+          variant="h4"
+          fontSize={24}
+          fontWeight={600}
+          sx={{ fontFamily: "Roboto, sans-serif" }}
+        >
+          OUR DETAILS
+        </Typography>
         <List>
-          <ListItemText primaryTypographyProps={{ sx: { fontSize: "1.2rem" } }}>
+          <ListItemText
+            primaryTypographyProps={{
+              sx: { fontSize: "18px", fontWeight: 500 },
+            }}
+          >
             Titan Security Europe 61 Bridge Street, Kington, Herefordshire, HR5
             3DJ
           </ListItemText>
 
-          <ListItemText primaryTypographyProps={{ sx: { fontSize: "1.2rem" } }}>
+          <ListItemText
+            primaryTypographyProps={{
+              sx: { fontSize: "18px", fontWeight: 500 },
+            }}
+          >
             <Link
               href="#"
               sx={{
@@ -41,7 +56,11 @@ const Footer = () => {
             </Link>
           </ListItemText>
 
-          <ListItemText primaryTypographyProps={{ sx: { fontSize: "1.2rem" } }}>
+          <ListItemText
+            primaryTypographyProps={{
+              sx: { fontSize: "18px", fontWeight: 500 },
+            }}
+          >
             <Link
               href="#"
               sx={{
@@ -55,10 +74,21 @@ const Footer = () => {
         </List>
       </Grid>
 
-      <Grid item xs={6} sm={3}>
-        <Typography variant="h4">SECTORS</Typography>
+      <Grid item xs={12} sm={6} md={3}>
+        <Typography
+          variant="h4"
+          fontSize={24}
+          fontWeight={600}
+          sx={{ fontFamily: "Roboto, sans-serif" }}
+        >
+          SECTORS
+        </Typography>
         <List style={{ listStyle: "none" }}>
-          <ListItemText primaryTypographyProps={{ sx: { fontSize: "1.2rem" } }}>
+          <ListItemText
+            primaryTypographyProps={{
+              sx: { fontSize: "18px", fontWeight: 500 },
+            }}
+          >
             <Link
               href="#"
               sx={{
@@ -71,7 +101,11 @@ const Footer = () => {
             </Link>
           </ListItemText>
 
-          <ListItemText primaryTypographyProps={{ sx: { fontSize: "1.2rem" } }}>
+          <ListItemText
+            primaryTypographyProps={{
+              sx: { fontSize: "18px", fontWeight: 500 },
+            }}
+          >
             <Link
               href="#"
               sx={{
@@ -84,7 +118,11 @@ const Footer = () => {
             </Link>
           </ListItemText>
 
-          <ListItemText primaryTypographyProps={{ sx: { fontSize: "1.2rem" } }}>
+          <ListItemText
+            primaryTypographyProps={{
+              sx: { fontSize: "18px", fontWeight: 500 },
+            }}
+          >
             <Link
               href="#"
               sx={{
@@ -99,10 +137,21 @@ const Footer = () => {
         </List>
       </Grid>
 
-      <Grid item xs={6} sm={3}>
-        <Typography variant="h4">SERVICES</Typography>
+      <Grid item xs={12} sm={6} md={3}>
+        <Typography
+          variant="h4"
+          fontSize={24}
+          fontWeight={600}
+          sx={{ fontFamily: "Roboto, sans-serif" }}
+        >
+          SERVICES
+        </Typography>
         <List style={{ listStyle: "none" }}>
-          <ListItemText primaryTypographyProps={{ sx: { fontSize: "1.2rem" } }}>
+          <ListItemText
+            primaryTypographyProps={{
+              sx: { fontSize: "18px", fontWeight: 500 },
+            }}
+          >
             <Link
               href="#"
               sx={{
@@ -115,7 +164,11 @@ const Footer = () => {
             </Link>
           </ListItemText>
 
-          <ListItemText primaryTypographyProps={{ sx: { fontSize: "1.2rem" } }}>
+          <ListItemText
+            primaryTypographyProps={{
+              sx: { fontSize: "18px", fontWeight: 500 },
+            }}
+          >
             <Link
               href="#"
               sx={{
@@ -127,7 +180,12 @@ const Footer = () => {
               Close Protection Security
             </Link>
           </ListItemText>
-          <ListItemText primaryTypographyProps={{ sx: { fontSize: "1.2rem" } }}>
+
+          <ListItemText
+            primaryTypographyProps={{
+              sx: { fontSize: "18px", fontWeight: 500 },
+            }}
+          >
             <Link
               href="#"
               sx={{
@@ -141,10 +199,21 @@ const Footer = () => {
           </ListItemText>
         </List>
       </Grid>
-      <Grid item xs={6} sm={3}>
-        <Typography variant="h4">LATEST NEWS</Typography>
+      <Grid item xs={12} sm={6} md={3}>
+        <Typography
+          variant="h4"
+          fontSize={24}
+          fontWeight={600}
+          sx={{ fontFamily: "Roboto, sans-serif" }}
+        >
+          LATEST NEWS
+        </Typography>
         <List style={{ listStyle: "none" }}>
-          <ListItemText primaryTypographyProps={{ sx: { fontSize: "1.2rem" } }}>
+          <ListItemText
+            primaryTypographyProps={{
+              sx: { fontSize: "18px", fontWeight: 500 },
+            }}
+          >
             <Link
               href="#"
               sx={{
@@ -157,7 +226,11 @@ const Footer = () => {
             </Link>
           </ListItemText>
 
-          <ListItemText primaryTypographyProps={{ sx: { fontSize: "1.2rem" } }}>
+          <ListItemText
+            primaryTypographyProps={{
+              sx: { fontSize: "18px", fontWeight: 500 },
+            }}
+          >
             <Link
               href="#"
               sx={{
@@ -169,7 +242,11 @@ const Footer = () => {
               Case Study: UK Theatre
             </Link>
           </ListItemText>
-          <ListItemText primaryTypographyProps={{ sx: { fontSize: "1.2rem" } }}>
+          <ListItemText
+            primaryTypographyProps={{
+              sx: { fontSize: "18px", fontWeight: 500 },
+            }}
+          >
             <Link
               href="#"
               sx={{
