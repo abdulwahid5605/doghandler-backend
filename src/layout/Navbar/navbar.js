@@ -11,6 +11,7 @@ import {
   ListItem,
   ListItemText,
   Hidden,
+  Link,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
@@ -23,7 +24,7 @@ const Navbar = () => {
   };
 
   const menuItems = [
-    { text: "Home Page", link: "/" },
+    { text: "Homepage", link: "/" },
     { text: "Security Guards", link: "/about" },
     { text: "Security Services", link: "/contact" },
   ];
@@ -52,13 +53,9 @@ const Navbar = () => {
           </Hidden>
 
           {/* Logo */}
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1, color: "black" }}
-          >
-            Your Logo
-          </Typography>
+          <Box sx={{ flexGrow: 1 }}>
+            <img src="/logo.png" alt="Logo" sx={{ flexGrow: 1 }} />
+          </Box>
 
           {/* Drawer for Links and Buttons */}
           <Hidden mdUp>
@@ -72,30 +69,37 @@ const Navbar = () => {
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
+                  backgroundColor: "#142032",
                 },
               }}
             >
               <IconButton
                 onClick={toggleMenu}
-                sx={{ position: "absolute", top: "0", right: "0", m: 1 }}
+                sx={{
+                  position: "absolute",
+                  top: "0",
+                  right: "0",
+                  m: 1,
+                  color: "white",
+                }}
               >
                 <CloseIcon />
               </IconButton>
-
+              <Box>
+                <img src="/logo.png" alt="Logo" sx={{ flexGrow: 1 }} />
+              </Box>
               <List>
                 {menuItems.map((item) => (
-                  <ListItem
-                    button
-                    key={item.text}
-                    onClick={toggleMenu}
-                    sx={{ color: "black" }}
-                  >
-                    <a href={item.link}>
+                  <ListItem key={item.text} onClick={toggleMenu}>
+                    <Link href={item.link} sx={{ textDecoration: "none" }}>
                       <ListItemText
                         primary={item.text}
-                        style={{ textDecoration: "none", color: "black" }}
+                        style={{
+                          textDecoration: "none",
+                          color: "white",
+                        }}
                       />
-                    </a>
+                    </Link>
                   </ListItem>
                 ))}
               </List>
@@ -108,19 +112,21 @@ const Navbar = () => {
               <Typography
                 variant="h6"
                 component="div"
-                sx={{ "& > *": { mr: 3 } }}
+                sx={{
+                  "& > *": { mr: "21px" },
+                  fontWeight: 600,
+                }}
               >
                 {menuItems.map((item) => (
-                  <a
+                  <Link
                     href={item.link}
                     style={{
                       color: "black",
                       textDecoration: "none",
-                      ":hover": { color: "navy" },
                     }}
                   >
                     {item.text}
-                  </a>
+                  </Link>
                 ))}
               </Typography>
             </Box>
