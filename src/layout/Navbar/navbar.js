@@ -113,7 +113,7 @@ const Navbar = () => {
                 variant="h6"
                 component="div"
                 sx={{
-                  "& > *": { mr: "21px" },
+                  "& > *": { mr: "20px" },
                   fontWeight: 600,
                 }}
               >
