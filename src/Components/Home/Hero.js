@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid, Typography, TextField, Button, Box, Paper } from "@mui/material";
 
-const Home = () => {
+const Hero = () => {
   return (
     <div style={{ height: "80vh", backgroundImage: "url('security.png')" }}>
       <Grid container spacing={3}>
@@ -89,4 +89,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Hero;

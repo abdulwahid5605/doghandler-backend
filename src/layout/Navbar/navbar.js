@@ -24,7 +24,7 @@ const Navbar = () => {
   };
 
   const menuItems = [
-    { text: "Homepage", link: "/" },
+    { text: "Home", link: "/" },
     { text: "Security Guards", link: "/about" },
     { text: "Security Services", link: "/contact" },
   ];
@@ -36,25 +36,23 @@ const Navbar = () => {
         sx={{
           backgroundColor: "white",
           boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+          minHeight: { xs: "90px", lg: "110px" },
         }}
       >
         <Toolbar>
           {/* Menu Icon Button */}
-          <Hidden mdUp>
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              onClick={toggleMenu}
-              sx={{ color: "black" }}
-            >
-              <MenuIcon />
-            </IconButton>
-          </Hidden>
 
           {/* Logo */}
-          <Box sx={{ flexGrow: 1 }}>
-            <img src="/logo.png" alt="Logo" sx={{ flexGrow: 1 }} />
+          <Box sx={{ flexGrow: 1, display: "flex" }}>
+            <img
+              src="/logo.png"
+              alt="Logo"
+              style={{
+                width: "auto", // Ensures the image width adjusts based on its container
+                height: "auto", // Maintains the aspect ratio
+                maxWidth: "40%", // Sets the maximum width to 100% of the container width
+              }}
+            />
           </Box>
 
           {/* Drawer for Links and Buttons */}
@@ -88,7 +86,15 @@ const Navbar = () => {
               <Box>
                 <img src="/logo.png" alt="Logo" sx={{ flexGrow: 1 }} />
               </Box>
-              <List>
+              <List
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  textAlign: "center",
+                }}
+              >
                 {menuItems.map((item) => (
                   <ListItem key={item.text} onClick={toggleMenu}>
                     <Link href={item.link} sx={{ textDecoration: "none" }}>
@@ -102,6 +108,16 @@ const Navbar = () => {
                     </Link>
                   </ListItem>
                 ))}
+                <ListItem onClick={toggleMenu}>
+                  <Button sx={{ width: "150px" }} variant="contained">
+                    Login
+                  </Button>
+                </ListItem>
+                <ListItem onClick={toggleMenu}>
+                  <Button sx={{ width: "150px" }} variant="contained">
+                    Register
+                  </Button>
+                </ListItem>
               </List>
             </Drawer>
           </Hidden>
@@ -110,19 +126,24 @@ const Navbar = () => {
           <Hidden smDown>
             <Box sx={{ flexGrow: 1 }}>
               <Typography
-                variant="h6"
+                fontSize={18}
                 component="div"
                 sx={{
                   "& > *": { mr: "20px" },
                   fontWeight: 600,
+                  display: "flex",
+                  gap: 2,
                 }}
               >
                 {menuItems.map((item) => (
                   <Link
                     href={item.link}
-                    style={{
-                      color: "black",
+                    sx={{
+                      color: "#192d5c",
                       textDecoration: "none",
+                      "&:hover": {
+                        color: "#3766a3 ", // Light blue color
+                      },
                     }}
                   >
                     {item.text}
@@ -131,12 +152,25 @@ const Navbar = () => {
               </Typography>
             </Box>
           </Hidden>
-          <Box>
-            <Button variant="contained" style={{ marginRight: "10px" }}>
-              Login
-            </Button>
-            <Button variant="contained">Register</Button>
-          </Box>
+          <Hidden smDown>
+            <Box>
+              <Button variant="contained" style={{ marginRight: "10px" }}>
+                Login
+              </Button>
+              <Button variant="contained">Register</Button>
+            </Box>
+          </Hidden>
+          <Hidden mdUp>
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              onClick={toggleMenu}
+              sx={{ color: "black" }}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Hidden>
         </Toolbar>
       </AppBar>
     </>
