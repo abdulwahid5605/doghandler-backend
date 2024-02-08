@@ -1,18 +1,31 @@
 import { Box, Container } from "@mui/material";
 import "./App.css";
-import EmailComponent from "./Components/EmailComponent";
+import Hero from "./Components/Home/Hero";
 import Footer from "./layout/Footer/Footer";
 import Navbar from "./layout/Navbar/navbar";
-import OfferComponenet from "./Components/OfferComponenet";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import CustomCard from "./Components/Home/Card";
+import Location from "./Components/Home/Location";
+import SecurityServices from "./Components/Home/SecurityServices";
+import OrganizationHero from "./Components/Organization/OrganizationHero";
+import OrganizationBox from "./Components/Organization/OrganizationBox";
+import Organization from "./Pages/Organization";
+import Home from "./Pages/Home";
+import LoginSignup from "./Pages/LoginSignup/LoginSignup";
+import SecurityAreas from "./Pages/SecurityAreas";
 
 function App() {
   return (
     <>
       <Navbar />
-      <Box sx={{ minHeight: "400px" }}>
-        <EmailComponent />
-        <OfferComponenet />
-      </Box>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/organization" element={<Organization />} />
+          <Route path="/securityareas" element={<SecurityAreas />} />
+          <Route path="/login" element={<LoginSignup />} />
+        </Routes>
+      </BrowserRouter>
       <Footer />
     </>
   );

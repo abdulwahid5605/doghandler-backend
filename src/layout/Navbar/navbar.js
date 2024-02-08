@@ -129,7 +129,7 @@ const Navbar = () => {
                 fontSize={18}
                 component="div"
                 sx={{
-                  "& > *": { mr: "21px" },
+                  "& > *": { mr: "20px" },
                   fontWeight: 600,
                   display: "flex",
                   gap: 2,
