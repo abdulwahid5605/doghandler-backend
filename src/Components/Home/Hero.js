@@ -3,7 +3,7 @@ import { Grid, Typography, TextField, Button, Box, Paper } from "@mui/material";
 
 const Hero = () => {
   return (
-    <div style={{ height: "80vh", backgroundImage: "url('security.png')" }}>
+    <div style={{ width: "100%", backgroundImage: "url('security.png')" }}>
       <Grid container spacing={3}>
         {/* First Div */}
         <Grid item xs={12} sm={6}>

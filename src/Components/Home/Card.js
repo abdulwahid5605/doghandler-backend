@@ -7,21 +7,26 @@ import {
   Typography,
 } from "@material-ui/core";
 import { CardData } from "../../data";
-import SecurityIcon from "@material-ui/icons/Security";
 
 const CustomCard = () => {
   return (
-    <Box>
+    <Box style={{ marginTop: "2vmax" }}>
       <Typography
         variant="h4"
-        style={{ textAlign: "center", color: "#3766a3", marginTop: "2vmax" }}
+        style={{
+          textAlign: "center",
+          color: "#3766a3",
+          marginTop: "3vmax",
+          marginBottom: "3vmax",
+          fontWeight: "600",
+        }}
       >
         SECURITY SECTORS
       </Typography>
       <Typography
         variant="body1"
         style={{
-          fontWeight: "bold",
+          fontWeight: "600",
           textAlign: "center",
           marginTop: "2vmax",
           marginBottom: "2vmax",
@@ -52,22 +57,24 @@ const CustomCard = () => {
               justifyContent: "center",
               flexDirection: "column",
               margin: "10px",
+              "@media (min-width: 600px)": {
+                display: "block",
+                width: "100%",
+              },
             }}
           >
-            <SecurityIcon
-              style={{ fontSize: 200, color: "#3766a3" }} // Adjust icon size and color
-            />
+            {item.icon}
             <CardContent>
               <Typography
                 gutterBottom
                 variant="h5"
                 component="h2"
-                style={{ textAlign: "center" }}
+                style={{ textAlign: "center", fontWeight: "600" }}
               >
                 {item.title}
               </Typography>
               <Typography
-                variant="body2"
+                variant="body1"
                 color="textSecondary"
                 component="p"
                 style={{ textAlign: "center" }}
