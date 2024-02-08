@@ -8,6 +8,8 @@ const OfferComponenet = () => {
     <Box
       sx={{
         backgroundColor: "#142032",
+        marginTop: "60px",
+        paddingY: "30px",
       }}
     >
       <Container
