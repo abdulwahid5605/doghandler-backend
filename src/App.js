@@ -15,7 +15,7 @@ import LoginSignup from "./Pages/LoginSignup/LoginSignup";
 import SecurityAreas from "./Pages/SecurityAreas";
 import WhyChoose from "./Components/WhyChoose";
 import Testimonials from "./Components/Testimonials";
-import InformationModal from "./Components/InformationModal";
+import InformationModal from "./Components/SecurityAreas/ObjectFormModal";
 import Layout from "./layout/Layout";
 import Dashboard from "./Components/Dashboard/Dashboard";
 

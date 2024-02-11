@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Grid, Button, Typography, Paper, Box } from "@material-ui/core";
 import { display } from "@mui/system";
-import InformationModal from "../InformationModal";
 import { Container } from "@mui/material";
+import ObjectFormModal from "./ObjectFormModal";
 
 const SecurityAreasBox = () => {
   const [open, setOpen] = useState(false);
@@ -219,7 +219,7 @@ const SecurityAreasBox = () => {
             </Box>
           </Box>
         </Grid>
-        <InformationModal open={open} handleClose={handleClose} />
+        <ObjectFormModal open={open} handleClose={handleClose} />
       </Grid>
     </Container>
   );
