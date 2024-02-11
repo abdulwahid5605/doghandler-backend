@@ -138,6 +138,28 @@ const DashboardCard = () => {
               </Button>
             </Box>
           </Box>
+          <Box>
+            <Paper
+              style={{
+                height: "15rem",
+                width: "15rem",
+                marginLeft: "3px",
+                padding: "1vmax",
+                boxSizing: "border-box",
+              }}
+            >
+              <Typography
+                variant="h6"
+                style={{ fontWeight: "bold", fontStyle: "italic" }}
+              >
+                Address
+              </Typography>
+              <Typography variant="body1">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magnam
+                minima dicta ad possimus.
+              </Typography>
+            </Paper>
+          </Box>
         </Box>
       </Grid>
 
