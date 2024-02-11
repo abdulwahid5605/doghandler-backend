@@ -15,9 +15,16 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleLoginClick = () => {
+    navigate("/login"); // Navigate to the login page
+  };
 
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
@@ -25,8 +32,9 @@ const Navbar = () => {
 
   const menuItems = [
     { text: "Home", link: "/" },
-    { text: "Security Guards", link: "/about" },
-    { text: "Security Services", link: "/contact" },
+    { text: "Security Guards", link: "/organization" },
+    { text: "Security Services", link: "/securityareas" },
+    { text: "Dashboard", link: "/dashboard" },
   ];
 
   return (
@@ -43,14 +51,23 @@ const Navbar = () => {
           {/* Menu Icon Button */}
 
           {/* Logo */}
-          <Box sx={{ flexGrow: 1, display: "flex" }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: "flex",
+              maxWidth: "40%",
+              maxHeight: "40%",
+            }}
+          >
             <img
-              src="/logo.png"
+              src="/K9Logo.png"
               alt="Logo"
               style={{
                 width: "auto", // Ensures the image width adjusts based on its container
                 height: "auto", // Maintains the aspect ratio
-                maxWidth: "40%", // Sets the maximum width to 100% of the container width
+                maxWidth: "40%",
+                maxHeight: "40%",
+                objectFit: "contain", // Sets the maximum width to 100% of the container width
               }}
             />
           </Box>
@@ -154,7 +171,13 @@ const Navbar = () => {
           </Hidden>
           <Hidden smDown>
             <Box>
-              <Button variant="contained" style={{ marginRight: "10px" }}>
+              <Button
+                onClick={() => {
+                  handleLoginClick();
+                }}
+                variant="contained"
+                style={{ marginRight: "10px" }}
+              >
                 Login
               </Button>
               <Button variant="contained">Register</Button>

@@ -16,20 +16,56 @@ import SecurityAreas from "./Pages/SecurityAreas";
 import WhyChoose from "./Components/WhyChoose";
 import Testimonials from "./Components/Testimonials";
 import InformationModal from "./Components/InformationModal";
+import Layout from "./layout/Layout";
+import Dashboard from "./Components/Dashboard/Dashboard";
 
 function App() {
   return (
     <>
-      <Navbar />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/organization" element={<Organization />} />
-          <Route path="/securityareas" element={<SecurityAreas />} />
-          <Route path="/login" element={<LoginSignup />} />
+          <Route
+            path="/"
+            element={
+              <Layout>
+                <Home />
+              </Layout>
+            }
+          />
+          <Route
+            path="/organization"
+            element={
+              <Layout>
+                <Organization />
+              </Layout>
+            }
+          />
+          <Route
+            path="/securityareas"
+            element={
+              <Layout>
+                <SecurityAreas />
+              </Layout>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <Layout>
+                <LoginSignup />
+              </Layout>
+            }
+          />
+          <Route
+            path="/dashboard"
+            element={
+              <Layout>
+                <Dashboard />
+              </Layout>
+            }
+          />
         </Routes>
       </BrowserRouter>
-      <Footer />
     </>
   );
 }

@@ -1,8 +1,20 @@
 import React, { useState } from "react";
 import { Grid, Button, Typography, Paper, Box } from "@material-ui/core";
 import { display } from "@mui/system";
+import InformationModal from "../InformationModal";
+import { Container } from "@mui/material";
 
 const OrganizationBox = () => {
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
   const array = [
     {
       name: "Organization 1",
@@ -37,166 +49,179 @@ const OrganizationBox = () => {
   };
 
   return (
-    <Grid
-      container
-      spacing={2}
-      style={{ marginTop: "2vmax", padding: "2vmax" }}
-    >
-      <Grid item xs={12} md={6}>
-        <Typography
-          variant="h4"
-          style={{
-            marginTop: "1vmax",
-            marginBottom: "1vmax",
-            fontWeight: "bold",
-          }}
-        >
-          Organizations
-        </Typography>
-        <Box
-          style={{
-            display: "flex",
-            flexDirection: "row",
-          }}
-        >
-          <Box>
-            <Paper
-              style={{
-                height: "15rem",
-                width: "15rem",
-                display: "flex",
-                flexDirection: "column",
-                padding: "1vmax",
-                boxSizing: "border-box",
-              }}
-            >
-              {array.map((item) => (
-                <Typography variant="body1" style={{ padding: "0.3vmax" }}>
-                  {item.name}
-                </Typography>
-              ))}
-            </Paper>
-            <Box
-              style={{
-                display: "flex",
-                justifyContent: "flex-end",
-                marginTop: "1vmax",
-              }}
-            >
-              <Button
-                variant="contained"
-                color="primary"
-                style={{ marginRight: "1vmax" }}
+    <Container>
+      <Grid
+        container
+        spacing={2}
+        style={{ marginTop: "2vmax", padding: "2vmax" }}
+      >
+        <Grid item xs={12} md={6}>
+          <Typography
+            variant="h4"
+            style={{
+              marginTop: "1vmax",
+              marginBottom: "1vmax",
+              fontWeight: "bold",
+            }}
+          >
+            Organizations
+          </Typography>
+          <Box
+            style={{
+              display: "flex",
+              flexDirection: "row",
+            }}
+          >
+            <Box>
+              <Paper
+                style={{
+                  height: "15rem",
+                  width: "15rem",
+                  display: "flex",
+                  flexDirection: "column",
+                  padding: "1vmax",
+                  boxSizing: "border-box",
+                }}
               >
-                Add
-              </Button>
-              <Button variant="contained" color="primary">
-                Edit
-              </Button>
+                {array.map((item) => (
+                  <Typography variant="body1" style={{ padding: "0.3vmax" }}>
+                    {item.name}
+                  </Typography>
+                ))}
+              </Paper>
+              <Box
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  marginTop: "1vmax",
+                }}
+              >
+                <Button
+                  variant="contained"
+                  color="primary"
+                  style={{ marginRight: "1vmax" }}
+                  onClick={handleOpen}
+                >
+                  Add
+                </Button>
+                <Button
+                  onClick={handleOpen}
+                  variant="contained"
+                  color="primary"
+                >
+                  Edit
+                </Button>
+              </Box>
+            </Box>
+            <Box>
+              <Paper
+                style={{
+                  height: "15rem",
+                  width: "15rem",
+                  marginLeft: "3px",
+                  padding: "1vmax",
+                  boxSizing: "border-box",
+                }}
+              >
+                <Typography
+                  variant="h6"
+                  style={{ fontWeight: "bold", fontStyle: "italic" }}
+                >
+                  Address
+                </Typography>
+                <Typography variant="body1">
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Magnam minima dicta ad possimus.
+                </Typography>
+              </Paper>
             </Box>
           </Box>
-          <Box>
-            <Paper
-              style={{
-                height: "15rem",
-                width: "15rem",
-                marginLeft: "3px",
-                padding: "1vmax",
-                boxSizing: "border-box",
-              }}
-            >
-              <Typography
-                variant="h6"
-                style={{ fontWeight: "bold", fontStyle: "italic" }}
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <Typography
+            variant="h4"
+            style={{
+              marginTop: "1vmax",
+              marginBottom: "1vmax",
+              fontWeight: "bold",
+            }}
+          >
+            Dog Handlers
+          </Typography>
+          <Box
+            style={{
+              display: "flex",
+              flexDirection: "row",
+            }}
+          >
+            <Box>
+              <Paper
+                style={{
+                  height: "15rem",
+                  width: "15rem",
+                  display: "flex",
+                  flexDirection: "column",
+                  padding: "1vmax",
+                  boxSizing: "border-box",
+                }}
               >
-                Address
-              </Typography>
-              <Typography variant="body1">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magnam
-                minima dicta ad possimus.
-              </Typography>
-            </Paper>
-          </Box>
-        </Box>
-      </Grid>
-      <Grid item xs={12} md={6}>
-        <Typography
-          variant="h4"
-          style={{
-            marginTop: "1vmax",
-            marginBottom: "1vmax",
-            fontWeight: "bold",
-          }}
-        >
-          Dog Handlers
-        </Typography>
-        <Box
-          style={{
-            display: "flex",
-            flexDirection: "row",
-          }}
-        >
-          <Box>
-            <Paper
-              style={{
-                height: "15rem",
-                width: "15rem",
-                display: "flex",
-                flexDirection: "column",
-                padding: "1vmax",
-                boxSizing: "border-box",
-              }}
-            >
-              {array2.map((item) => (
-                <Typography variant="body1" style={{ padding: "0.3vmax" }}>
-                  {item.name}
+                {array2.map((item) => (
+                  <Typography variant="body1" style={{ padding: "0.3vmax" }}>
+                    {item.name}
+                  </Typography>
+                ))}
+              </Paper>
+              <Box
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  marginTop: "1vmax",
+                }}
+              >
+                <Button
+                  variant="contained"
+                  color="primary"
+                  style={{ marginRight: "1vmax" }}
+                  onClick={handleOpen}
+                >
+                  Add
+                </Button>
+                <Button
+                  onClick={handleOpen}
+                  variant="contained"
+                  color="primary"
+                >
+                  Edit
+                </Button>
+              </Box>
+            </Box>
+            <Box>
+              <Paper
+                style={{
+                  height: "15rem",
+                  width: "15rem",
+                  marginLeft: "3px",
+                  padding: "1vmax",
+                  boxSizing: "border-box",
+                }}
+              >
+                <Typography
+                  variant="h6"
+                  style={{ fontWeight: "bold", fontStyle: "italic" }}
+                >
+                  Address
                 </Typography>
-              ))}
-            </Paper>
-            <Box
-              style={{
-                display: "flex",
-                justifyContent: "flex-end",
-                marginTop: "1vmax",
-              }}
-            >
-              <Button
-                variant="contained"
-                color="primary"
-                style={{ marginRight: "1vmax" }}
-              >
-                Add
-              </Button>
-              <Button variant="contained" color="primary">
-                Edit
-              </Button>
+                <Typography variant="body1">
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Magnam minima dicta ad possimus.
+                </Typography>
+              </Paper>
             </Box>
           </Box>
-          <Box>
-            <Paper
-              style={{
-                height: "15rem",
-                width: "15rem",
-                marginLeft: "3px",
-                padding: "1vmax",
-                boxSizing: "border-box",
-              }}
-            >
-              <Typography
-                variant="h6"
-                style={{ fontWeight: "bold", fontStyle: "italic" }}
-              >
-                Address
-              </Typography>
-              <Typography variant="body1">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magnam
-                minima dicta ad possimus.
-              </Typography>
-            </Paper>
-          </Box>
-        </Box>
+        </Grid>
+        <InformationModal open={open} handleClose={handleClose} />
       </Grid>
-    </Grid>
+    </Container>
   );
 };
 

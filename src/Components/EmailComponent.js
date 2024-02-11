@@ -10,6 +10,7 @@ const EmailComponent = () => {
         display: "flex",
         flexDirection: { xs: "column", sm: "row" },
         alignItems: "center",
+        marginY: "50px",
       }}
     >
       <Grid item xs={12} sm={6} sx={{ p: 2 }}>
