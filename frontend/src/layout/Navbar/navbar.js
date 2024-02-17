@@ -60,13 +60,12 @@ const Navbar = () => {
             }}
           >
             <img
-              src="/K9Logo.png"
+              src="/securityLogo.png"
               alt="Logo"
               style={{
-                width: "auto", // Ensures the image width adjusts based on its container
-                height: "auto", // Maintains the aspect ratio
-                maxWidth: "40%",
-                maxHeight: "40%",
+                width: "150px", // Ensures the image width adjusts based on its container
+                height: "150px", // Maintains the aspect ratio
+
                 objectFit: "contain", // Sets the maximum width to 100% of the container width
               }}
             />

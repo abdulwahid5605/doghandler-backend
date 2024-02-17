@@ -7,6 +7,7 @@ import { Button } from "@material-ui/core";
 import AccordionUsage from "./Accordion";
 import AddListModal from "./AddListModal";
 import DashboardCard from "./DashboardCard";
+import DashboardHero from "./DashboardHero";
 
 const Dashboard = () => {
   const [value, setValue] = useState(0);
@@ -43,7 +44,7 @@ const Dashboard = () => {
   ];
   return (
     <>
-      <OrganizationHero />
+      <DashboardHero />
       <DashboardCard />
     </>
   );

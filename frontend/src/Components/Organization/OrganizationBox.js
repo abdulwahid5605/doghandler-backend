@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Grid, Button, Typography, Paper, Box } from "@material-ui/core";
 import { display } from "@mui/system";
-import InformationModal from "../InformationModal";
 import { Container } from "@mui/material";
+import InformationModal from "./InformationModal";
 
 const OrganizationBox = () => {
   const [open, setOpen] = useState(false);
