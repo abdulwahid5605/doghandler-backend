@@ -1,16 +1,3 @@
-// bcrypt: Anyone(including admin) can read the data(including user password) data from mongodb compass. bcrypt is used to hash the password
-
-// jsonwebtoken: Used to generate token
-
-// cookie-parser: jsonwebtoken is stored in cookie because it is not accessible to the user through frontend. If cookie parser is not used then token will be stored in "local storage" and anyone can access that which can be harmful
-
-// validator: It checks that the user have entered the correct email or not
-
-// We will encrypt the password before saving it in the user model
-
-// updation of user email, name and avatar would be seperate from updation of password
-// snario: what if the password is hashed once during the creation of the user and the user update the profile(except password) then hashed password will hash again(problem). Therefore we will apply the condition that if the password is not modified(e.g not updated) then no action will be performed otherwise it will be hashed
-
 const mongoose = require("mongoose");
 // validator checks that the email is in correct format or not
 const validator = require("validator");
