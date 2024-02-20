@@ -12,10 +12,9 @@ const connectDatabase = () => {
     .then((data) => {
       console.log(`Mongodb is connected with server ${data.connection.host}`);
     })
-    // we have dealt with error in "server.js" using unhandled promise rejection
-    // .catch((err) => {
-    //   console.log(err);
-    // });
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 module.exports = connectDatabase;

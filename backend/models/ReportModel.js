@@ -39,8 +39,10 @@ const reportSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "DogHandler",
     required: true,
-    maxLength: [200, "Name cannot exceed more then 200 characters"],
-    minLength: [4, "Name should be more then 4 characters"],
+  },
+  isSent: {
+    type: Boolean,
+    default: false,
   },
   signed: {
     type: String,
