@@ -6,6 +6,7 @@ const {
   getAllSearchAreasByDogHandlerId,
   deleteSearchArea,
 } = require("../controller/searchAreaController");
+const { isAuthenticatedUser } = require("../middleware/auth");
 
 // Create a new search area
 router.post("/searchareas", isAuthenticatedUser, createSearchArea);

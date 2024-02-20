@@ -1,6 +1,6 @@
 const Report = require("../models/ReportModel");
 
-export const addReport = async (req, res) => {
+exports.addReport = async (req, res) => {
   try {
     const report = new Report(req.body);
     await report.save();
@@ -10,7 +10,7 @@ export const addReport = async (req, res) => {
   }
 };
 
-export const getAllReportsByDogHandlerId = async (req, res) => {
+exports.getAllReportsByDogHandlerId = async (req, res) => {
   try {
     const reports = await Report.find({ dogHandler: req.params.dogHandlerId });
     res.json(reports);
@@ -19,7 +19,7 @@ export const getAllReportsByDogHandlerId = async (req, res) => {
   }
 };
 
-export const updateReport = async (req, res) => {
+exports.updateReport = async (req, res) => {
   try {
     const report = await Report.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
@@ -33,7 +33,7 @@ export const updateReport = async (req, res) => {
   }
 };
 
-export const deleteReport = async (req, res) => {
+exports.deleteReport = async (req, res) => {
   try {
     const report = await Report.findByIdAndDelete(req.params.id);
     if (!report) {
