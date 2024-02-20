@@ -1,6 +1,8 @@
 // nodemailer: If someone uses the option of forgot password, then reset password link(otp) should be sent to the user. Advantage: We donot have to type an email. It is done automatically by nodemailer
 
 const User = require("../models/userModels");
+// const dogHandlerUser = require("../models/");
+// const Organization = require("../models/")
 const ErrorHander = require("../utils/errorHander");
 
 // concising code
@@ -15,34 +17,35 @@ const crypto = require("crypto");
 
 // post Api
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
-  // in case you want to take all the inputs
-  // const user= await User.create(req.body)
-
-  // in case you want to take specific inputs
-  // what is destructuring? it a property used to extract values from from array and object and assign them to variable
   const { name, email, password } = req.body;
 
+  let role;
+
+  // Check if email is present in organization
+  const organizationUser = await Organization.findOne({ email });
+  if (organizationUser) {
+    role = "organization";
+  } else {
+    // Check if email is present in dog handler
+    const dogHandlerUser = await DogHandler.findOne({ email });
+    if (dogHandlerUser) {
+      role = "doghandler";
+    } else {
+      role = "user";
+    }
+  }
+
+  // Create user with determined role
   const user = await User.create({
     name,
     email,
     password,
+    role,
   });
 
   const token = user.getJwtToken();
 
   sendToken(user, 201, res);
-
-  // user can be created from this statement as well
-  // const user = await User.create(req.body)
-
-  // we are now minimizing the lines of code and adding this token in the cookie with the help pf new fucntion that we are creating
-  // res.status(201).json({
-  // success: true,
-  // user'
-
-  // rather then user jwt token will be returned
-  // token
-  // })
 });
 
 // login Api
