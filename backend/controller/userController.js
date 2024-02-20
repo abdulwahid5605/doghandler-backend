@@ -1,8 +1,8 @@
 // nodemailer: If someone uses the option of forgot password, then reset password link(otp) should be sent to the user. Advantage: We donot have to type an email. It is done automatically by nodemailer
 
 const User = require("../models/userModels");
-// const dogHandlerUser = require("../models/");
-// const Organization = require("../models/")
+const dogHandlerUser = require("../models/dogHandlerModel");
+const Organization = require("../models/organizationModel");
 const ErrorHander = require("../utils/errorHander");
 
 // concising code
@@ -85,13 +85,6 @@ exports.logoutUser = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// Forgot Password api
-// user enter the "email" first
-// cuz he forgot passowrd not email
-// hence we search the email in the database
-// what if user have entered wrong email that does not even exist in the database?
-// what if the email have been found?
-// 404:requested page is not available
 exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
   const email = req.body.email;
   const user = await User.findOne({ email: email });
