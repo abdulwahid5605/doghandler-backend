@@ -1,19 +1,26 @@
 const express = require("express");
 
 const { isAuthenticatedUser } = require("../middleware/auth");
+const router = express.Router();
 const {
-  createDogHandlers,
-  getAllDogHandlers,
-  updateDogHandlers,
+  addDogHandler,
+  updateDogHandler,
+  deleteDogHandler,
+  getDogHandlersByOrganizationId,
 } = require("../controller/dogHandlerController");
 
-const router = express.Router();
+router.post("/dogHandler/create", addDogHandler);
 
-router.route("/dogHandlers/add").post(createDogHandlers);
-router
-  .route("/doghandler/getAllDogHandlers")
-  .get(isAuthenticatedUser, getAllDogHandlers);
+// Update a dog handler by ID
+router.put("/dogHandler/update/:id", updateDogHandler);
 
-router.route("/doghandler/updateDoghandler/:id").put(updateDogHandlers);
+// Delete a dog handler by ID
+router.delete("/dogHandler/delete/:id", deleteDogHandler);
+
+// Get all dog handlers by organization ID
+router.get(
+  "/dogHandler/getByOrgId/:organizationId",
+  getDogHandlersByOrganizationId
+);
 
 module.exports = router;

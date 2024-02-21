@@ -70,6 +70,27 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
   sendToken(user, 200, res);
 });
 
+exports.sendEmail = catchAsyncErrors(async (req, res) => {
+  const { name, email, phone, location, message } = req.body;
+
+  const queryMessage = `
+    Name: ${name}\n
+    Email: ${email}\n
+    Phone: ${phone}\n
+    Location: ${location}\n
+    Message: ${message}
+  `;
+
+  await sendEmail({
+    email: email, // Replace with your email address or recipient's email
+    subject: "Query from Website",
+    message: queryMessage,
+  });
+
+  res
+    .status(200)
+    .json({ success: true, message: "Query email sent successfully" });
+});
 // logout user is a get api
 // it deletes the jwt token from cookies showing that no user have logged in
 exports.logoutUser = catchAsyncErrors(async (req, res, next) => {

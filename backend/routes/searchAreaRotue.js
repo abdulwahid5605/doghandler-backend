@@ -9,10 +9,10 @@ const {
 const { isAuthenticatedUser } = require("../middleware/auth");
 
 // Create a new search area
-router.post("/searchareas", isAuthenticatedUser, createSearchArea);
+router.post("/searchareas/create", isAuthenticatedUser, createSearchArea);
 
 // Update a search area
-router.put("/searchareas/:id", isAuthenticatedUser, updateSearchArea);
+router.put("/searchareas/update/:id", isAuthenticatedUser, updateSearchArea);
 
 // Get all search areas by dog handler ID
 router.get(
@@ -22,6 +22,6 @@ router.get(
 );
 
 // Delete a search area
-router.delete("/searchareas/:id", isAuthenticatedUser, deleteSearchArea);
+router.delete("/searchareas/delete/:id", isAuthenticatedUser, deleteSearchArea);
 
 module.exports = router;

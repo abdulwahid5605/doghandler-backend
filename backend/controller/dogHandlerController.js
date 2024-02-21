@@ -1,66 +1,107 @@
 const DogHandler = require("../models/dogHandlerModel");
-const ErrorHander = require("../utils/errorHander");
-const catchAsyncErrors = require("../middleware/catchAsyncError");
+const Organization = require("../models/organizationModel");
 
-exports.createDogHandlers = catchAsyncErrors(async (req, res, next) => {
-  const { name, phoneNo, email, status } = req.body;
+// Add a new dog handler
+const addDogHandler = async (req, res) => {
+  try {
+    const {
+      name,
+      organizationId,
+      email,
+      phoneNumber,
+      address,
+      postalCode,
+      province,
+      city,
+      reporter,
+    } = req.body;
 
-  const dogHandlers = await DogHandler.create({
-    name,
-    // organization,
-    phoneNo,
-    email,
-    status,
-  });
-
-  res.status(201).json({
-    success: true,
-    dogHandlers,
-  });
-});
-
-exports.getAllDogHandlers = catchAsyncErrors(async (req, res, next) => {
-  const user = req.user;
-  var doghandler = [];
-  if (user.role === "superadmin") {
-    doghandler = await DogHandler.find();
-  } else if (user.role === "doghandler") {
-    doghandler = await DogHandler.findOne({ email: user.email });
-  }
-
-  res.status(201).json({
-    success: true,
-    doghandler,
-  });
-});
-
-exports.updateDogHandlers = catchAsyncErrors(async (req, res, next) => {
-  const { id } = req.params;
-  const {
-    name,
-    // organization,
-    phoneNo,
-    status,
-  } = req.body;
-
-  let doghandler = await DogHandler.findById(id);
-
-  if (!doghandler) {
-    return res.status(404).json({
-      success: false,
-      message: "Organization not found",
+    const organization = await Organization.findById(organizationId);
+    if (!organization) {
+      return res.status(404).json({ message: "Organization not found" });
+    }
+    const dogHandler = new DogHandler({
+      name,
+      organizationId,
+      email,
+      phoneNumber,
+      address,
+      postalCode,
+      province,
+      city,
+      reporter,
     });
+    const newDogHandler = await dogHandler.save();
+    res.status(201).json(newDogHandler);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
   }
+};
 
-  doghandler.name = name;
-  // organization.organization = organization;
-  doghandler.phoneNo = phoneNo;
-  doghandler.status = status;
+// Update a dog handler by ID
+const updateDogHandler = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const {
+      name,
+      email,
+      phoneNumber,
+      address,
+      postalCode,
+      province,
+      city,
+      reporter,
+    } = req.body;
+    const updatedDogHandler = await DogHandler.findByIdAndUpdate(
+      id,
+      {
+        name,
+        phoneNumber,
+        address,
+        postalCode,
+        province,
+        city,
+        reporter,
+      },
+      { new: true }
+    );
+    if (!updatedDogHandler) {
+      return res.status(404).json({ message: "Dog handler not found" });
+    }
+    res.json(updatedDogHandler);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
 
-  doghandler = await doghandler.save();
+// Delete a dog handler by ID
+const deleteDogHandler = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedDogHandler = await DogHandler.findByIdAndDelete(id);
+    if (!deletedDogHandler) {
+      return res.status(404).json({ message: "Dog handler not found" });
+    }
+    res.json({ message: "Dog handler deleted successfully" });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
 
-  res.status(200).json({
-    success: true,
-    doghandler,
-  });
-});
+// Get all dog handlers by organization ID
+const getDogHandlersByOrganizationId = async (req, res) => {
+  try {
+    const { organizationId } = req.params;
+    const dogHandlers = await DogHandler.find({ organizationId });
+    res.json(dogHandlers);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+module.exports = {
+  addDogHandler,
+  updateDogHandler,
+  deleteDogHandler,
+  getDogHandlersByOrganizationId,
+};
