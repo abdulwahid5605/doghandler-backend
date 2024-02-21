@@ -19,30 +19,44 @@ const organizationSchema = new mongoose.Schema({
   address: {
     type: String,
     required: true,
-    maxLength: [50, "Address cannot exceed more then 50 characters"],
+    maxLength: [100, "Address cannot exceed more then 50 characters"],
     minLength: [4, "Address should be more then 4 characters"],
   },
 
-  contact: {
+  postalCode: {
     type: Number,
     required: true,
   },
-
-  status: {
-    type: Boolean,
-    default: true,
+  province: {
+    type: String,
+    required: true,
   },
 
-  orgLogo: {
-    public_id: {
-      type: String,
-      required: true,
-    },
-    url: {
-      type: String,
-      required: true,
-    },
+  city: {
+    type: String,
+    required: true,
   },
+
+  // contact: {
+  //   type: Number,
+  //   required: true,
+  // },
+
+  // status: {
+  //   type: Boolean,
+  //   default: true,
+  // },
+
+  // orgLogo: {
+  //   public_id: {
+  //     type: String,
+  //     required: true,
+  //   },
+  //   url: {
+  //     type: String,
+  //     required: true,
+  //   },
+  // },
 
   createdAt: {
     type: Date,
