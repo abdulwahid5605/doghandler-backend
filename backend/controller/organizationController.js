@@ -3,15 +3,15 @@ const ErrorHander = require("../utils/errorHander");
 const catchAsyncErrors = require("../middleware/catchAsyncError");
 
 exports.createOrganization = catchAsyncErrors(async (req, res, next) => {
-  const { name, email, address, contact, status, orgLogo } = req.body;
+  const { name, email, address, postalCode, province, city } = req.body;
 
   const organization = await Organization.create({
     name,
     email,
     address,
-    contact,
-    status,
-    orgLogo,
+    postalCode,
+    province,
+    city,
   });
 
   res.status(201).json({
