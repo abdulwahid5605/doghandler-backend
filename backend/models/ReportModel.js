@@ -13,7 +13,6 @@ const reportSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "SearchArea",
     required: true,
-    validate: [validator.isEmail, "Please Enter a valid Email"],
   },
   geoTag: {
     type: String,

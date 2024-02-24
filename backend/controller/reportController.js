@@ -1,6 +1,7 @@
 const { request } = require("express");
 const Doghandler = require("../models/dogHandlerModel");
 const SearchArea = require("../models/SearchAreaModel");
+const Report = require("../models/ReportModel");
 const { sendEmail } = require("../utils/sendEmail");
 
 exports.addReport = async (req, res) => {
@@ -10,8 +11,8 @@ exports.addReport = async (req, res) => {
       await report.save();
       res.status(201).json(report);
     } else {
-      const doghandler = await Doghandler.findById(request.body.dogHandler);
-      const searchArea = await SearchArea.findById(request.body.searchArea);
+      const doghandler = await Doghandler.findById(request.body?.dogHandler);
+      // const searchArea = await SearchArea.findById(request.body.searchArea);
       if (doghandler) {
         const queryMessage = `
         Name: ${req.body.name}\n

@@ -7,12 +7,14 @@ const {
   updateDogHandler,
   deleteDogHandler,
   getDogHandlersByOrganizationId,
+  getDogHandlersById,
 } = require("../controller/dogHandlerController");
 
 router.post("/dogHandler/create", addDogHandler);
 
 // Update a dog handler by ID
 router.put("/dogHandler/update/:id", updateDogHandler);
+router.get("/dogHandler/get/:id", getDogHandlersById);
 
 // Delete a dog handler by ID
 router.delete("/dogHandler/delete/:id", deleteDogHandler);

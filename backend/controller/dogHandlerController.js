@@ -109,9 +109,20 @@ const getDogHandlersByOrganizationId = async (req, res) => {
   }
 };
 
+const getDogHandlersById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const dogHandler = await DogHandler.findOne({ email: id });
+    res.json(dogHandler);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
 module.exports = {
   addDogHandler,
   updateDogHandler,
   deleteDogHandler,
   getDogHandlersByOrganizationId,
+  getDogHandlersById,
 };
