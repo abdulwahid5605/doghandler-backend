@@ -1,7 +1,7 @@
 // nodemailer: If someone uses the option of forgot password, then reset password link(otp) should be sent to the user. Advantage: We donot have to type an email. It is done automatically by nodemailer
 
 const User = require("../models/userModels");
-const dogHandlerUser = require("../models/dogHandlerModel");
+const DogHandler = require("../models/dogHandlerModel");
 const Organization = require("../models/organizationModel");
 const ErrorHander = require("../utils/errorHander");
 
@@ -22,18 +22,18 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
   let role;
 
   // Check if email is present in organization
-  // const organizationUser = await Organization.findOne({ email });
-  // if (organizationUser) {
-  //   role = "organization";
-  // } else {
-  //   // Check if email is present in dog handler
-  //   const dogHandlerUser = await DogHandler.findOne({ email });
-  //   if (dogHandlerUser) {
-  //     role = "doghandler";
-  //   } else {
-  //     role = "user";
-  //   }
-  // }
+  const organizationUser = await Organization.findOne({ email });
+  if (organizationUser) {
+    role = "organization";
+  } else {
+    // Check if email is present in dog handler
+    const dogHandlerUser = await DogHandler.findOne({ email });
+    if (dogHandlerUser) {
+      role = "doghandler";
+    } else {
+      role = "user";
+    }
+  }
 
   // Create user with determined role
   const user = await User.create({

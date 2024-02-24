@@ -1,6 +1,7 @@
 const Organization = require("../models/organizationModel");
 const ErrorHander = require("../utils/errorHander");
 const catchAsyncErrors = require("../middleware/catchAsyncError");
+const User = require("../models/userModels");
 
 exports.createOrganization = catchAsyncErrors(async (req, res, next) => {
   const { name, email, address, postalCode, province, city } = req.body;
@@ -14,6 +15,16 @@ exports.createOrganization = catchAsyncErrors(async (req, res, next) => {
     city,
   });
 
+  const existingUser = await User.findOne({ email });
+
+  if (existingUser) {
+    // If the user exists, update their role to "dog handler"
+    if (existingUser.role === "user") {
+      existingUser.role = "organization";
+    }
+    await existingUser.save();
+  }
+
   res.status(201).json({
     success: true,
     organization,
@@ -26,13 +37,10 @@ exports.getAllOrganization = catchAsyncErrors(async (req, res, next) => {
   if (user.role === "superadmin") {
     organization = await Organization.find();
   } else if (user.role === "organization") {
-    organization = await Organization.findOne({ email: user.email });
+    organization = await Organization.find({ email: user.email });
   }
 
-  res.status(201).json({
-    success: true,
-    organization,
-  });
+  res.status(201).json(organization);
 });
 
 exports.updateOrganization = catchAsyncErrors(async (req, res, next) => {

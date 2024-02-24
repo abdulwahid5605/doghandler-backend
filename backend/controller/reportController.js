@@ -1,4 +1,7 @@
-const Report = require("../models/ReportModel");
+const { request } = require("express");
+const Doghandler = require("../models/dogHandlerModel");
+const SearchArea = require("../models/SearchAreaModel");
+const { sendEmail } = require("../utils/sendEmail");
 
 exports.addReport = async (req, res) => {
   try {
@@ -7,10 +10,25 @@ exports.addReport = async (req, res) => {
       await report.save();
       res.status(201).json(report);
     } else {
-      // const dogHandler =
-      // const report = new Report(req.body);
-      // await report.save();
-      // res.status(201).json(report);
+      const doghandler = await Doghandler.findById(request.body.dogHandler);
+      const searchArea = await SearchArea.findById(request.body.searchArea);
+      if (doghandler) {
+        const queryMessage = `
+        Name: ${req.body.name}\n
+        Email: ${doghandler.reporter.email}\n
+        SearchAreaName: ${searchArea?.name}
+      `;
+
+        await sendEmail({
+          email: doghandler.reporter.email, // Replace with your email address or recipient's email
+          subject: "Report",
+          message: queryMessage,
+        });
+      }
+
+      const report = new Report(req.body);
+      await report.save();
+      res.status(201).json(report);
     }
   } catch (error) {
     res.status(400).json({ message: error.message });

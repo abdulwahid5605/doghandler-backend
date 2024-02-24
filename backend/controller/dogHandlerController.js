@@ -1,5 +1,6 @@
 const DogHandler = require("../models/dogHandlerModel");
 const Organization = require("../models/organizationModel");
+const User = require("../models/userModels");
 
 // Add a new dog handler
 const addDogHandler = async (req, res) => {
@@ -19,6 +20,15 @@ const addDogHandler = async (req, res) => {
     const organization = await Organization.findById(organizationId);
     if (!organization) {
       return res.status(404).json({ message: "Organization not found" });
+    }
+    const existingUser = await User.findOne({ email });
+
+    if (existingUser) {
+      // If the user exists, update their role to "dog handler"
+      if (existingUser.role === "user") {
+        existingUser.role = "doghandler";
+      }
+      await existingUser.save();
     }
     const dogHandler = new DogHandler({
       name,
