@@ -16,6 +16,12 @@ const searchAreaSchema = new mongoose.Schema({
     required: true,
     validate: [validator.isEmail, "Please Enter a valid Email"],
   },
+
+  address: {
+    type: String,
+    required: true,
+  },
+
   phone: {
     type: String,
     required: true,
@@ -55,7 +61,7 @@ const searchAreaSchema = new mongoose.Schema({
   },
   status: {
     type: Boolean,
-    default: true,
+    default: false,
   },
   createdAt: {
     type: Date,

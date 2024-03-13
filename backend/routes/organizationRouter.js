@@ -3,6 +3,7 @@ const {
   createOrganization,
   getAllOrganization,
   updateOrganization,
+  deleteOrganization,
 } = require("../controller/organizationController");
 const { isAuthenticatedUser } = require("../middleware/auth");
 
@@ -14,5 +15,7 @@ router
   .get(isAuthenticatedUser, getAllOrganization);
 
 router.route("/organization/updateOrganization/:id").put(updateOrganization);
+
+router.delete("/organization/delete/:id", deleteOrganization);
 
 module.exports = router;

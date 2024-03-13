@@ -71,3 +71,16 @@ exports.updateOrganization = catchAsyncErrors(async (req, res, next) => {
     organization,
   });
 });
+
+exports.deleteOrganization = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedOrganization = await Organization.findByIdAndDelete(id);
+    if (!deletedOrganization) {
+      return res.status(404).json({ message: "Organization not found" });
+    }
+    res.json({ message: "Organization deleted successfully" });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
