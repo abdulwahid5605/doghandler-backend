@@ -13,6 +13,7 @@ const {
   UpdateUserRole,
   deleteUser,
   sendEmail,
+  mobLoginUser,
 } = require("../controller/userController");
 const { isAuthenticatedUser, authorizedRoles } = require("../middleware/auth");
 const router = express.Router();
@@ -22,6 +23,7 @@ router.route("/register").post(registerUser);
 
 // post api to login user
 router.route("/login").post(loginUser);
+router.route("/doghandler/login").post(mobLoginUser);
 
 // get Api
 router.route("/logout").get(logoutUser);

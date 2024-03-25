@@ -363,3 +363,38 @@ exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
 
   res.status(201).json({ success: true, message: "User deleted successfully" });
 });
+
+// mob app login api
+exports.mobLoginUser = catchAsyncErrors(async (req, res, next) => {
+  // picking value from body
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return next(new ErrorHander("Please enter Email & Password", 400));
+  }
+
+  const user = await User.findOne({ email }).select("+password");
+
+  if (!user) {
+    return next(new ErrorHander("Invalid Email Or Password", 401));
+  }
+
+  const isPasswordMatched = await user.comparePassword(password);
+
+  // what if password does not match such that the user have entered the wrong password
+  if (!isPasswordMatched) {
+    return next(new ErrorHander("Invalid Email Or Password", 401));
+  }
+
+  // Check if user's role is "doghandler"
+  if (user.role !== "doghandler") {
+    return next(
+      new ErrorHander(
+        "Access denied. Only dog handlers are allowed to log in.",
+        403
+      )
+    );
+  }
+
+  // If user's role is "doghandler", proceed with sending the token
+  sendToken(user, 200, res);
+});
