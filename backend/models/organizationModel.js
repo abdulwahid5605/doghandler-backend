@@ -37,6 +37,21 @@ const organizationSchema = new mongoose.Schema({
     required: true,
   },
 
+  password: {
+    type: String,
+    required: true,
+  },
+  avatar: {
+    public_id: {
+      type: String,
+      required: true,
+    },
+    url: {
+      type: String,
+      required: true,
+    },
+  },
+
   // contact: {
   //   type: Number,
   //   required: true,

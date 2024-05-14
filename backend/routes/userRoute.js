@@ -38,7 +38,7 @@ router.route("/password/reset/:token").put(resetPassword);
 // it is necessary to be logged in to access getUserDetails
 router.route("/me").get(isAuthenticatedUser, getUserDetails);
 
-router.route("/send_Email").post(isAuthenticatedUser, sendEmail);
+router.route("/send_Email").post(sendEmail);
 
 // put api to update password
 router.route("/password/update").put(isAuthenticatedUser, updatePassword);

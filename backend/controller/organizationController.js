@@ -2,35 +2,61 @@ const Organization = require("../models/organizationModel");
 const ErrorHander = require("../utils/errorHander");
 const catchAsyncErrors = require("../middleware/catchAsyncError");
 const User = require("../models/userModels");
-
+const cloudinary = require("cloudinary");
 exports.createOrganization = catchAsyncErrors(async (req, res, next) => {
-  const { name, email, address, postalCode, province, city } = req.body;
-
-  const organization = await Organization.create({
-    name,
-    email,
-    address,
-    postalCode,
-    province,
-    city,
+  const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    folder: "resume",
+    width: 150,
+    crop: "scale",
   });
+  const { name, email, password, address, postalCode, province, city } =
+    req.body;
 
-  const existingUser = await User.findOne({ email });
+  try {
+    // Check if a user with the provided email already exists
+    const existingUser = await User.findOne({ email });
 
-  if (existingUser) {
-    // If the user exists, update their role to "dog handler"
-    if (existingUser.role === "user") {
-      existingUser.role = "organization";
+    if (existingUser) {
+      // If a user with the email already exists, return an error message
+      return res.status(400).json({
+        success: false,
+        message: "User with this email already exists.",
+      });
     }
-    await existingUser.save();
+
+    // Create the organization
+    const organization = await Organization.create({
+      name,
+      email,
+      password,
+      address,
+      postalCode,
+      province,
+      city,
+      avatar: {
+        public_id: myCloud.public_id,
+        url: myCloud.secure_url,
+      },
+    });
+
+    // Create a new user with the organization role
+    const user = await User.create({
+      name,
+      email,
+      password,
+      role: "organization",
+    });
+
+    // Send a success response
+    res.status(201).json({
+      success: true,
+      organization,
+    });
+  } catch (error) {
+    // Handle any errors
+    next(error);
   }
-
-  res.status(201).json({
-    success: true,
-    organization,
-  });
 });
-
 exports.getAllOrganization = catchAsyncErrors(async (req, res, next) => {
   const user = req.user;
   var organization = [];

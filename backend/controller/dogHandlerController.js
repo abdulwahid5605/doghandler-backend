@@ -9,6 +9,7 @@ const addDogHandler = async (req, res) => {
       name,
       organizationId,
       email,
+      password,
       phoneNumber,
       address,
       postalCode,
@@ -24,22 +25,29 @@ const addDogHandler = async (req, res) => {
     const existingUser = await User.findOne({ email });
 
     if (existingUser) {
-      // If the user exists, update their role to "dog handler"
-      if (existingUser.role === "user") {
-        existingUser.role = "doghandler";
-      }
-      await existingUser.save();
+      // If a user with the email already exists, return an error message
+      return res.status(400).json({
+        success: false,
+        message: "User with this email already exists.",
+      });
     }
     const dogHandler = new DogHandler({
       name,
       organizationId,
       email,
+      password,
       phoneNumber,
       address,
       postalCode,
       province,
       city,
       reporter,
+    });
+    const user = await User.create({
+      name,
+      email,
+      password,
+      role: "doghandler",
     });
     const newDogHandler = await dogHandler.save();
     res.status(201).json(newDogHandler);

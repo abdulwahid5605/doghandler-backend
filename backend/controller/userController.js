@@ -1,19 +1,17 @@
-// nodemailer: If someone uses the option of forgot password, then reset password link(otp) should be sent to the user. Advantage: We donot have to type an email. It is done automatically by nodemailer
-
 const User = require("../models/userModels");
 const DogHandler = require("../models/dogHandlerModel");
 const Organization = require("../models/organizationModel");
 const ErrorHander = require("../utils/errorHander");
-
-// concising code
+const PDFDocument = require("pdfkit");
+const fs = require("fs");
 const sendToken = require("../utils/jwtToken");
-
-// This will handle the error such as the required things(e.g email,name) are not provided by the user
+const path = require("path");
 const catchAsyncErrors = require("../middleware/catchAsyncError");
+// const pdf = require("E:/K9/security_K9_web/public/assets/images/securityGaurd.jpg");
 const { sendEmail } = require("../utils/sendEmail");
-
-// crypto:for generating reset password token
 const crypto = require("crypto");
+// import image from "./map.png";
+// import pdf from "../../output.pdf";
 
 // post Api
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
@@ -70,21 +68,117 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
   sendToken(user, 200, res);
 });
 
-exports.sendEmail = catchAsyncErrors(async (req, res) => {
+exports.sendEmail = catchAsyncErrors((req, res) => {
   const { name, email, phone, location, message } = req.body;
 
-  const queryMessage = `
-    Name: ${name}\n
-    Email: ${email}\n
-    Phone: ${phone}\n
-    Location: ${location}\n
-    Message: ${message}
-  `;
+  const createPDF = () => {
+    const doc = new PDFDocument();
+    doc.pipe(fs.createWriteStream("output.pdf"));
 
-  await sendEmail({
+    const currentDate = new Date().toLocaleDateString();
+    const currentTime = new Date().toLocaleTimeString();
+    const gpsCoordinates = "Your GPS Coordinates"; // Replace with actual GPS coordinates
+    const imagePath = "map.png";
+    const imageBuffer = fs.readFileSync(imagePath);
+    const imageWidth = 100; // Width of the image
+    const imageHeight = 100; // Height of the image
+    const margin = 10; // Margin from the right side
+    const x = doc.page.width - imageWidth - margin;
+    const y = doc.y;
+
+    doc.image(imageBuffer, x, y, { width: imageWidth, height: imageHeight });
+    doc
+      .font("Helvetica-Bold")
+      .fontSize(16)
+      .text("Report Heading", { align: "left" });
+    doc
+      .font("Helvetica")
+      .fontSize(12)
+      .text(`Date: ${currentDate}`, { align: "left" });
+    doc
+      .font("Helvetica")
+      .fontSize(12)
+      .text(`Time: ${currentTime}`, { align: "left" });
+    doc
+      .font("Helvetica")
+      .fontSize(12)
+      .text(`GPS Coordinates: ${gpsCoordinates}`, { align: "left" });
+
+    // Add search area and dog handler
+    const searchArea = "Search Area"; // Replace with actual search area
+    const dogHandler = "Dog Handler"; // Replace with actual dog handler name
+
+    doc.moveDown(2);
+    doc
+      .font("Helvetica-Bold")
+      .fontSize(14)
+      .text("Search Area:", { align: "left" });
+    doc.font("Helvetica").fontSize(12).text(searchArea, { align: "left" });
+    doc
+      .font("Helvetica-Bold")
+      .fontSize(14)
+      .text("Dog Handler:", { align: "left" });
+    doc.font("Helvetica").fontSize(12).text(dogHandler, { align: "left" });
+
+    // Add gap between sections
+    doc.moveDown();
+
+    // Task 1
+    doc.font("Helvetica-Bold").fontSize(14).text("Task 1:", { align: "left" });
+    const notesOne = "Notes";
+    const pictureOne = "Pictures";
+    // const pictures = ["path_to_picture_1.jpg", "path_to_picture_2.jpg"];
+    doc.font("Helvetica").fontSize(12).text(notesOne, { align: "left" });
+    doc.font("Helvetica").fontSize(12).text(pictureOne, { align: "left" });
+    doc.moveDown();
+
+    // Task 2
+    doc.font("Helvetica-Bold").fontSize(14).text("Task 2:", { align: "left" });
+    const notesTwo = "Notes";
+    const pictureTwo = "Pictures";
+    // const pictures = ["path_to_picture_1.jpg", "path_to_picture_2.jpg"];
+    doc.font("Helvetica").fontSize(12).text(notesTwo, { align: "left" });
+    doc.font("Helvetica").fontSize(12).text(pictureTwo, { align: "left" });
+    doc.moveDown();
+
+    // Task 3
+    doc.font("Helvetica-Bold").fontSize(14).text("Task 3:", { align: "left" });
+    const notesThree = "Notes";
+    const pictureThree = "Pictures";
+    // const pictures = ["path_to_picture_1.jpg", "path_to_picture_2.jpg"];
+    doc.font("Helvetica").fontSize(12).text(notesThree, { align: "left" });
+    doc.font("Helvetica").fontSize(12).text(pictureThree, { align: "left" });
+    doc.moveDown();
+    // Add pictures
+    // for (const picturePath of pictures) {
+    //   doc.moveDown();
+    //   doc.image(picturePath, { fit: [200, 200], align: "left" });
+    // }
+
+    doc.end();
+  };
+
+  const queryMessage = `
+  Name: ${name}\n
+  Email: ${email}\n
+  Phone: ${phone}\n
+  Location: ${location}\n
+  Message: ${message}
+  `;
+  createPDF();
+  // Construct absolute path to the attachment file
+  const attachmentPath = path.resolve(__dirname, "../../output.pdf");
+
+  sendEmail({
     email: email, // Replace with your email address or recipient's email
     subject: "Query from Website",
     message: queryMessage,
+    attachments: [
+      {
+        filename: "output.pdf",
+        path: attachmentPath,
+      },
+    ],
   });
 
   res
