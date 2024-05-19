@@ -72,7 +72,12 @@ exports.getAllOrganization = catchAsyncErrors(async (req, res, next) => {
 exports.updateOrganization = catchAsyncErrors(async (req, res, next) => {
   const { id } = req.params;
   console.log(id);
-  const { name, address, contact, status, orgLogo } = req.body;
+  const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    folder: "resume",
+    width: 150,
+    crop: "scale",
+  });
+  const { name, address, contact, status } = req.body;
 
   let organization = await Organization.findById(id);
   console.log(organization);
@@ -88,7 +93,11 @@ exports.updateOrganization = catchAsyncErrors(async (req, res, next) => {
   organization.address = address;
   organization.contact = contact;
   organization.status = status;
-  organization.orgLogo = orgLogo;
+  // organization.orgLogo = orgLogo;
+  Organization.avatar = {
+    public_id: myCloud.public_id,
+    url: myCloud.secure_url,
+  };
 
   organization = await organization.save();
 

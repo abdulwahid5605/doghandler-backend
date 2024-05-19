@@ -52,27 +52,6 @@ const organizationSchema = new mongoose.Schema({
     },
   },
 
-  // contact: {
-  //   type: Number,
-  //   required: true,
-  // },
-
-  // status: {
-  //   type: Boolean,
-  //   default: true,
-  // },
-
-  // orgLogo: {
-  //   public_id: {
-  //     type: String,
-  //     required: true,
-  //   },
-  //   url: {
-  //     type: String,
-  //     required: true,
-  //   },
-  // },
-
   createdAt: {
     type: Date,
     default: Date.now,
